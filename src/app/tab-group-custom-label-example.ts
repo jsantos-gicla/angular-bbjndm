@@ -12,12 +12,14 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {id:1,concepto: 'Desconsolidación', proveedor: 'Bamport', costo: 1200.79, valor: 1500, disabled: true},
+  {id:1,concepto: 'Desconsolidación', proveedor: 'Bomport', costo: 1200.79, valor: 1500, disabled: true},
+  {id:1,concepto: 'Desconsolidación', proveedor: 'Bomport', costo: 800, valor: 300, disabled: false},
 ];
 
 const SERVICIOS_DISPONIBLES: PeriodicElement[] = [
-  {id:2,concepto: 'Almacenaje', proveedor: 'Bamport', costo: 600, valor: 0, disabled: false},
-  {id:3,concepto: 'Almacenaje', proveedor: 'Bamport', costo: 1201, valor: 0, disabled: false},
+  {id:2,concepto: 'Almacenaje', proveedor: 'Bomport', costo: 600, valor: 0, disabled: false},
+  {id:3,concepto: 'Almacenaje tipo 2', proveedor: 'Bomport', costo: 1201, valor: 0, disabled: false},
+  {id:3,concepto: 'Almacenaje tipo 1', proveedor: 'Bomport', costo: 100, valor: 0, disabled: false},
 ];
 
 /**
