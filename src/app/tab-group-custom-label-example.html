@@ -1,0 +1,182 @@
+<mat-tab-group #myname>
+  
+  <mat-tab>
+    <!-- #docregion label-directive -->
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">description</mat-icon>
+      <div class="tab-text" >Resumen</div>
+    </ng-template>
+    <!-- #enddocregion label-directive -->
+    <h3>Depósito</h3>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table1"  
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="dataSource"
+      [cdkDropListConnectedTo]="[doneList]"
+      (cdkDropListDropped)="dropTable($event)">
+
+       <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon cdkDragHandle style="pointer-events:all;">reorder</mat-icon>
+        </td>
+      </ng-container>
+
+      <!-- Concepto Column -->
+      <ng-container matColumnDef="concepto">
+        <th mat-header-cell *matHeaderCellDef> Concepto </th>
+        <td mat-cell *matCellDef="let element"> {{element.concepto}} </td>
+      </ng-container>
+
+      <!-- Proveedor Column -->
+      <ng-container matColumnDef="proveedor">
+        <th mat-header-cell *matHeaderCellDef> Proveedor </th>
+        <td mat-cell *matCellDef="let element"> {{element.proveedor}} </td>
+      </ng-container>
+
+      <!-- Costo Column -->
+      <ng-container matColumnDef="costo">
+        <th mat-header-cell *matHeaderCellDef> Costo </th>
+        <td mat-cell *matCellDef="let element"> {{element.costo}} </td>
+      </ng-container>
+
+      <!-- Valor Column -->
+      <ng-container matColumnDef="valor">
+        <th mat-header-cell *matHeaderCellDef> Valor </th>
+        <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>      
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="pointer-events:none;" cdkDrag (cdkDragStarted)="dragStarted($event)" [cdkDragData]="row"></tr>
+      <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+    </table>
+
+      <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="dataSource"
+    [cdkDropListConnectedTo]="[doneList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+
+    <div *ngFor="let data of dataSource" class="table-mobile dragable" cdkDrag [cdkDragDisabled]="data.disabled">   
+        <h4  class="title-1">{{ data.concepto }}</h4>
+
+      <mat-grid-list cols="2" rowHeight="6:1">
+        <mat-grid-tile> <p> Proveedor</p></mat-grid-tile>
+        <mat-grid-tile> <p> {{ data.proveedor }}</p></mat-grid-tile>
+        <mat-grid-tile>Costo</mat-grid-tile>
+        <mat-grid-tile><input style="border: 0; margin-left: 10em" type="text"  value="{{data.costo}}"/></mat-grid-tile>
+           <mat-grid-tile>Valor</mat-grid-tile>
+        <mat-grid-tile>{{data.valor}}</mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+
+    <br/>
+    <h3>Servicios disponibles</h3>
+
+    <table mat-table [dataSource]="dataServDisponibles" class="mat-elevation-z8 table1"  
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="dataServDisponibles"
+      [cdkDropListConnectedTo]="[todoList]"
+      (cdkDropListDropped)="dropTable($event)">
+
+       <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon cdkDragHandle style="pointer-events:all;">reorder</mat-icon>
+        </td>
+      </ng-container>
+
+      <!-- Concepto Column -->
+      <ng-container matColumnDef="concepto">
+        <th mat-header-cell *matHeaderCellDef> Concepto </th>
+        <td mat-cell *matCellDef="let element"> {{element.concepto}} </td>
+      </ng-container>
+
+      <!-- Proveedor Column -->
+      <ng-container matColumnDef="proveedor">
+        <th mat-header-cell *matHeaderCellDef> Proveedor </th>
+        <td mat-cell *matCellDef="let element"> {{element.proveedor}} </td>
+      </ng-container>
+
+      <!-- Costo Column -->
+      <ng-container matColumnDef="costo">
+        <th mat-header-cell *matHeaderCellDef> Costo </th>
+        <td mat-cell *matCellDef="let element"> {{element.costo}} </td>
+      </ng-container>
+
+      <!-- Valor Column -->
+      <ng-container matColumnDef="valor">
+        <th mat-header-cell *matHeaderCellDef> Valor </th>
+        <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>      
+      <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="pointer-events:none;" cdkDrag (cdkDragStarted)="dragStarted($event)" [cdkDragData]="row"></tr>
+    </table>
+
+
+    <div
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="dataServDisponibles"
+    [cdkDropListConnectedTo]="[todoList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+
+    <div *ngFor="let data of dataServDisponibles" class="table-mobile dragable" cdkDrag>   
+      <h4  class="title-1">{{ data.concepto }}</h4>
+
+      <mat-grid-list cols="2" rowHeight="6:1">
+        <mat-grid-tile> <p> Proveedor</p></mat-grid-tile>
+        <mat-grid-tile> <p> {{ data.proveedor }}</p></mat-grid-tile>
+        <mat-grid-tile>Costo</mat-grid-tile>
+        <mat-grid-tile><input style="border: 0; margin-left: 10em" type="text"  value="{{data.costo}}"/></mat-grid-tile>
+           <mat-grid-tile>Valor</mat-grid-tile>
+        <mat-grid-tile>{{data.valor}}</mat-grid-tile>
+      </mat-grid-list>
+    </div>
+
+  </div>
+
+  </mat-tab>
+
+  <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">local_airport</mat-icon>
+        <div class="tab-text" >Flete</div>
+      </ng-template>  
+      Contenido 2
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">corporate_fare</mat-icon>
+      <div class="tab-text" >Deposito</div> 
+    </ng-template>
+    Content 3
+  </mat-tab>
+
+   <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">local_police</mat-icon>
+      <div class="tab-text" >Depacho</div> 
+    </ng-template>
+    Content 4
+  </mat-tab>
+
+   <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">local_shipping</mat-icon>
+      <div class="tab-text" >Transporte Terreste</div> 
+    </ng-template>
+    Content 4
+  </mat-tab>
+</mat-tab-group>
